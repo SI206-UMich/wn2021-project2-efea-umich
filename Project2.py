@@ -134,7 +134,10 @@ def extra_credit(filepath):
     Please see the instructions document for more information on how to complete this function.
     You do not have to write test cases for this function.
     """
-    pass
+    with open(filepath, 'r') as f:
+        soup = BeautifulSoup(f, 'html.parser')
+        t = soup.find('div', id='description').text
+        return list(map(str.strip, re.findall(r'\b[A-Z]\w{2,}\b ?(?:\b[A-Z]\w{2,}\b ?)+', t)))
 
 
 class TestCases(unittest.TestCase):
@@ -223,6 +226,9 @@ class TestCases(unittest.TestCase):
 
         # check that the last row is 'Harry Potter: The Prequel (Harry Potter, #0.5)', 'J.K. Rowling'
         self.assertListEqual(l[-1], ['Harry Potter: The Prequel (Harry Potter, #0.5)', 'J.K. Rowling'])
+
+    def test_extra_credit(self):
+        print(extra_credit('extra_credit.htm'))
 
 
 if __name__ == '__main__':
