@@ -120,7 +120,11 @@ def write_csv(data, filename):
 
     This function should not return anything.
     """
-    pass
+    with open(filename, 'w') as f:
+        cw = csv.writer(f)
+        cw.writerow(['Book title,Author Name'])
+        for row in data:
+            cw.writerow(row)
 
 
 def extra_credit(filepath):
@@ -201,18 +205,24 @@ class TestCases(unittest.TestCase):
         self.assertTupleEqual(summaries[-1], ('Picture Books', 'Antiracist Baby', 'https://www.goodreads.com/choiceawards/best-picture-books-2020'))
     def test_write_csv(self):
         # call get_titles_from_search_results on search_results.htm and save the result to a variable
-        pass
+        s = get_titles_from_search_results('search_results.htm')
         # call write csv on the variable you saved and 'test.csv'
-
+        write_csv(s, 'test.csv')
         # read in the csv that you wrote (create a variable csv_lines - a list containing all the lines in the csv you just wrote to above)
+        with open('test.csv', 'r') as f:
+            r = csv.reader(f)
+            l = [line for line in r]
 
-        # check that there are 21 lines in the csv
+            # check that there are 21 lines in the csv
+            self.assertEqual(len(l), 21)
 
-        # check that the header row is correct
-
+            # check that the header row is correct
+            self.assertListEqual(l[0], ['Book title,Author Name'])
         # check that the next row is 'Harry Potter and the Deathly Hallows (Harry Potter, #7)', 'J.K. Rowling'
+            self.assertListEqual(l[1], ['Harry Potter and the Deathly Hallows (Harry Potter, #7)', 'J.K. Rowling'])
 
         # check that the last row is 'Harry Potter: The Prequel (Harry Potter, #0.5)', 'J.K. Rowling'
+        self.assertListEqual(l[-1], ['Harry Potter: The Prequel (Harry Potter, #0.5)', 'J.K. Rowling'])
 
 
 if __name__ == '__main__':
