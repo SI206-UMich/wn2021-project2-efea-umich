@@ -173,7 +173,6 @@ class TestCases(unittest.TestCase):
     def test_get_book_summary(self):
         # create a local variable – summaries – a list containing the results from get_book_summary()
         # for each URL in TestCases.search_urls (should be a list of tuples)
-        return
         summaries = list(map(get_book_summary, TestCases.search_urls))
         # check that the number of book summaries is correct (10)
         self.assertEqual(len(summaries), 10)
