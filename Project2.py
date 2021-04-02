@@ -189,7 +189,7 @@ class TestCases(unittest.TestCase):
 
 
         # check that the first book in the search has 337 pages
-        self.assertEqual(summaries[0][2] == 337)
+        self.assertEqual(summaries[0][2], 337)
 
     def test_summarize_best_books(self):
         # call summarize_best_books and save it to a variable
