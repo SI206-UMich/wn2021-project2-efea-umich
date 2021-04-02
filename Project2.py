@@ -137,7 +137,7 @@ def extra_credit(filepath):
     with open(filepath, 'r') as f:
         soup = BeautifulSoup(f, 'html.parser')
         t = soup.find('div', id='description').text
-        return list(map(str.strip, re.findall(r'\b[A-Z]\w{2,}\b ?(?:\b[A-Z]\w{2,}\b ?)+', t)))
+        return list(map(str.strip, re.findall(r'\b[A-Z]\w{2,}\b ?(?:\b[A-Z]\w*\b ?)+', t)))
 
 
 class TestCases(unittest.TestCase):
